@@ -17,7 +17,7 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Set up Flutter
+      - name: Set up Flutter Stable
         uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.22.3'
@@ -25,19 +25,23 @@ jobs:
 
       - name: Build Clean Flutter App
         run: |
+          # 1. સાચું નામ 'janata_awaaz' રાખીને પ્રોજેક્ટ બનાવો
           flutter create -t app --project-name janata_awaaz --org com.janata.awaaz app_workspace
+          
+          # 2. ફાઇલો અને ફોટો કોપી કરો
           cp lib/main.dart app_workspace/lib/main.dart
           cp pubspec.yaml app_workspace/pubspec.yaml
-          
-          [ -d "assets" ] && cp -r assets app_workspace/ || true
-          [ -d "android/app/src/main/res" ] && cp -r android/app/src/main/res app_workspace/android/app/src/main/ || true
+          [ -f "app_icon.png" ] && cp app_icon.png app_workspace/ || true
           
           cd app_workspace
 
+          # 3. Kotlin વર્ઝન ફિક્સ કરો
           sed -i 's/id "org.jetbrains.kotlin.android" version "[^"]*"/id "org.jetbrains.kotlin.android" version "1.9.10"/' android/settings.gradle || true
           sed -i "s/ext.kotlin_version = .*/ext.kotlin_version = '1.9.10'/" android/build.gradle || true
 
+          # 4. ડિપેન્ડન્સી લાવો, આઇકન બનાવો અને બિલ્ડ કરો
           flutter pub get
+          dart run flutter_launcher_icons
           flutter build apk --debug
 
       - name: Upload APK
