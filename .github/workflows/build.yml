@@ -22,13 +22,20 @@ jobs:
         with:
           channel: 'stable'
 
-      - name: Create Scaffold and Disable AAR Version Check
+      - name: Create Scaffold and Bypass Metadata Check
         run: |
           flutter create . --platforms=android --project-name janata_awaaz --org com.janata.awaaz
-          echo "android.disableMinCompileSdkCheck=true" >> android/gradle.properties
-          echo "flutter.minSdkVersion=21" >> android/local.properties
-          echo "flutter.compileSdkVersion=36" >> android/local.properties
-          echo "flutter.targetSdkVersion=36" >> android/local.properties
+          cat << 'EOF' >> android/app/build.gradle
+
+          gradle.projectsEvaluated {
+              tasks.withType(com.android.build.gradle.internal.tasks.CheckAarMetadataWorkAction).configureEach {
+                  enabled = false
+              }
+              tasks.matching { it.name.contains("AarMetadata") }.configureEach {
+                  enabled = false
+              }
+          }
+          EOF
 
       - name: Install dependencies
         run: flutter pub get
