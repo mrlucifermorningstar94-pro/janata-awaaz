@@ -11,20 +11,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up Java 17
+      - name: Set up Java
         uses: actions/setup-java@v4
         with:
-          distribution: 'zulu'
+          distribution: 'temurin'
           java-version: '17'
 
-      - name: Install Android Platform 36
-        run: |
-          yes | sdkmanager --licenses
-          sdkmanager "platforms;android-36" "build-tools;36.0.0"
-
-      - name: Set up Flutter
+      - name: Set up Flutter Stable
         uses: subosito/flutter-action@v2
         with:
+          flutter-version: '3.22.3'
           channel: 'stable'
 
       - name: Build Clean Flutter App
@@ -34,10 +30,6 @@ jobs:
           cp pubspec.yaml app_workspace/pubspec.yaml
           
           cd app_workspace
-          echo "flutter.minSdkVersion=21" >> android/local.properties
-          echo "flutter.compileSdkVersion=36" >> android/local.properties
-          echo "flutter.targetSdkVersion=36" >> android/local.properties
-
           flutter pub get
           flutter build apk --debug
 
