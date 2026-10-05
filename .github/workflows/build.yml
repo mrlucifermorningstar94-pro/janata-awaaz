@@ -17,31 +17,20 @@ jobs:
           distribution: 'zulu'
           java-version: '17'
 
-      - name: Set up Flutter
+      - name: Set up Flutter Stable
         uses: subosito/flutter-action@v2
         with:
+          flutter-version: '3.24.5'
           channel: 'stable'
 
-      - name: Generate Android Project and Update SDK Settings
+      - name: Create Android Scaffold
+        run: flutter create . --platforms=android --org com.janata.awaaz
+
+      - name: Fix MinSdk Direct
         run: |
-          flutter create . --platforms=android --org com.janata.awaaz
-          python3 -c "
-          import os
-          for root, dirs, files in os.walk('android'):
-              for f in files:
-                  if f.startswith('build.gradle'):
-                      p = os.path.join(root, f)
-                      with open(p, 'r') as file:
-                          content = file.read()
-                      content = content.replace('flutter.compileSdkVersion', '36')
-                      content = content.replace('compileSdk = flutter.compileSdkVersion', 'compileSdk = 36')
-                      content = content.replace('compileSdkVersion flutter.compileSdkVersion', 'compileSdkVersion 36')
-                      content = content.replace('flutter.minSdkVersion', '21')
-                      content = content.replace('minSdk = flutter.minSdkVersion', 'minSdk = 21')
-                      content = content.replace('minSdkVersion flutter.minSdkVersion', 'minSdkVersion 21')
-                      with open(p, 'w') as file:
-                          file.write(content)
-          "
+          sed -i 's/minSdkVersion = flutter.minSdkVersion/minSdkVersion = 21/g' android/app/build.gradle* || true
+          sed -i 's/minSdkVersion flutter.minSdkVersion/minSdkVersion 21/g' android/app/build.gradle* || true
+          sed -i 's/minSdk = flutter.minSdkVersion/minSdk = 21/g' android/app/build.gradle* || true
 
       - name: Install dependencies
         run: flutter pub get
