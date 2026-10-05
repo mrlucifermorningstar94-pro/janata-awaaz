@@ -20,29 +20,26 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.24.5'
           channel: 'stable'
 
-      - name: Create Android Project
-        run: flutter create . --platforms=android --project-name janata_awaaz --org com.janata.awaaz
-
-      - name: Patch Root Settings for Plugins
+      - name: Create Scaffold and Configure Android 10+
         run: |
-          cat << 'EOF' >> android/build.gradle
-          subprojects {
-              afterEvaluate { project ->
-                  if (project.hasProperty("android")) {
-                      android {
-                          compileSdkVersion 35
-                          defaultConfig {
-                              minSdkVersion 21
-                              targetSdkVersion 35
-                          }
-                      }
-                  }
-              }
-          }
-          EOF
+          flutter create . --platforms=android --project-name janata_awaaz --org com.janata.awaaz
+          # build.gradle ma direct navu Android (compileSdk 35, minSdk 29) set karvu
+          python3 -c "
+          import re
+          p = 'android/app/build.gradle'
+          try:
+              with open(p, 'r') as f:
+                  text = f.read()
+              text = re.sub(r'compileSdkVersion\s+.*', 'compileSdkVersion 35', text)
+              text = re.sub(r'minSdkVersion\s+.*', 'minSdkVersion 29', text)
+              text = re.sub(r'targetSdkVersion\s+.*', 'targetSdkVersion 35', text)
+              with open(p, 'w') as f:
+                  f.write(text)
+          except Exception as e:
+              pass
+          "
 
       - name: Install dependencies
         run: flutter pub get
