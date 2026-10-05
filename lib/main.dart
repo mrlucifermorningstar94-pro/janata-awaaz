@@ -18,7 +18,7 @@ class JanataAwaazApp extends StatefulWidget {
 }
 
 class _JanataAwaazAppState extends State<JanataAwaazApp> {
-  String _currentLang = 'en';
+  String _currentLang = 'gu';
 
   void _changeLanguage(String langCode) {
     setState(() {
@@ -33,7 +33,7 @@ class _JanataAwaazAppState extends State<JanataAwaazApp> {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: const Color(0xFFFF9933),
-        scaffoldBackgroundColor: const Color(0xFFF9FBF9),
+        scaffoldBackgroundColor: const Color(0xFFF4F6F8),
         colorScheme: ColorScheme.fromSeed(
           seedColor: const Color(0xFFFF9933),
           secondary: const Color(0xFF138808),
@@ -52,13 +52,13 @@ class AppStrings {
   static final Map<String, Map<String, String>> _values = {
     'en': {
       'app_title': 'Janata Awaaz',
-      'disclaimer': 'Disclaimer: Independent citizen platform. Official contacts sourced from open government portals (india.gov.in). Not an official government entity.',
+      'disclaimer': 'Independent citizen accountability portal. Voice against non-responsive administration & public representatives.',
       'btn_report': 'Report Local Issue & Evidence',
-      'btn_petition': 'National Citizen Petitions & Voting',
+      'btn_petition': 'Public Accountability Petitions & Voting',
       'lang_label': 'Language',
       'select_lang': 'Select Your Language',
       'anonymous_title': 'Keep Identity Completely Anonymous',
-      'anonymous_sub': 'Your name and contact will never be shared publicly or with authorities.',
+      'anonymous_sub': 'Your identity remains 100% confidential and safe.',
       'issue_title': 'Issue Title',
       'issue_desc': 'Detailed Description of the Issue',
       'location_hint': 'Location / Address',
@@ -68,21 +68,16 @@ class AppStrings {
       'remove': 'Remove',
       'submit_btn': 'Submit Official Report',
       'success_msg': 'Report recorded successfully in the system!',
-      'petition_badge': 'National Citizen Petition',
-      'petition_title': 'Demand Timely and Transparent Inquiries in Serious Cases',
-      'total_votes': 'Total Citizen Support:',
-      'vote_btn': 'Support this Petition (Vote)',
-      'voted_msg': 'Support recorded successfully!',
     },
     'gu': {
       'app_title': 'જનતા અવાજ',
-      'disclaimer': 'અસ્વીકરણ: આ એપ સ્વતંત્ર નાગરિક મંચ છે. સરકારી સંપર્કો india.gov.in પરથી મેળવેલા છે. કોઈ કાનૂની સરકારી સંસ્થાનું પ્રતિનિધિત્વ કરતું નથી.',
+      'disclaimer': 'નાગરિક અધિકાર અને જવાબદેહી મંચ. બેદરકાર તંત્ર, અધિકારી કે નેતાઓ સામે લોકઅવાજ ઉઠાવવાનું સ્વતંત્ર માધ્યમ.',
       'btn_report': 'સ્થાનિક સમસ્યા / પુરાવા નોંધો',
-      'btn_petition': 'રાષ્ટ્રીય જન પિટિશન અને વોટિંગ',
+      'btn_petition': 'જન જવાબદેહી પિટિશન અને વોટિંગ',
       'lang_label': 'ભાષા',
       'select_lang': 'તમારી ભાષા પસંદ કરો',
       'anonymous_title': 'ઓળખ સંપૂર્ણ ગુપ્ત રાખો (Anonymous)',
-      'anonymous_sub': 'તમારો નંબર કે નામ સરકાર કે પબ્લિકને ક્યારેય દેખાશે નહીં.',
+      'anonymous_sub': 'તમારું નામ કે નંબર કોઈને ક્યારેય દેખાશે નહીં.',
       'issue_title': 'સમસ્યાનું શીર્ષક',
       'issue_desc': 'સમસ્યાની સંપૂર્ણ વિગતવાર માહિતી',
       'location_hint': 'ઘટના સ્થળ / સરનામું',
@@ -92,21 +87,16 @@ class AppStrings {
       'remove': 'કાઢી નાખો',
       'submit_btn': 'ફરિયાદ સબમિટ કરો',
       'success_msg': 'ફરિયાદ સિસ્ટમમાં સફળતાપૂર્વક નોંધાઈ ગઈ છે!',
-      'petition_badge': 'રાષ્ટ્રીય માંગણી / પિટિશન',
-      'petition_title': 'ગંભીર ગુનાઓમાં ત્વરિત અને પારદર્શક તપાસ સુનિશ્ચિત કરવા બાબત',
-      'total_votes': 'કુલ નાગરિક સમર્થન:',
-      'vote_btn': 'આ પિટિશનને સમર્થન આપો (Vote)',
-      'voted_msg': 'તમારો જનમત સફળતાપૂર્વક નોંધાઈ ગયો છે!',
     },
     'hi': {
       'app_title': 'जनता आवाज़',
-      'disclaimer': 'अस्वीकरण: स्वतंत्र नागरिक मंच। सरकारी संपर्क आधिकारिक पोर्टल (india.gov.in) से लिए गए हैं। किसी सरकारी संस्था का प्रतिनिधित्व नहीं करता।',
+      'disclaimer': 'नागरिक अधिकार और जवाबदेही मंच। लापरवाह प्रशासन, अधिकारी या जनप्रतिनिधियों के खिलाफ स्वतंत्र जनमंच।',
       'btn_report': 'स्थानीय समस्या और साक्ष्य दर्ज करें',
-      'btn_petition': 'राष्ट्रीय नागरिक याचिका और मतदान',
+      'btn_petition': 'जन जवाबदेही याचिका और मतदान',
       'lang_label': 'भाषा',
       'select_lang': 'अपनी भाषा चुनें',
       'anonymous_title': 'पहचान पूरी तरह गोपनीय रखें (Anonymous)',
-      'anonymous_sub': 'आपका नाम या नंबर सरकार या जनता को कभी नहीं दिखेगा।',
+      'anonymous_sub': 'आपकी पहचान हमेशा सुरक्षित और गुप्त रहेगी।',
       'issue_title': 'समस्या का शीर्षक',
       'issue_desc': 'समस्या का पूरा विवरण',
       'location_hint': 'स्थान / पता',
@@ -116,16 +106,11 @@ class AppStrings {
       'remove': 'हटाएं',
       'submit_btn': 'शिकायत दर्ज करें',
       'success_msg': 'शिकायत सफलतापूर्वक दर्ज कर ली गई है!',
-      'petition_badge': 'राष्ट्रीय नागरिक याचिका',
-      'petition_title': 'गंभीर मामलों में त्वरित और निष्पक्ष जांच की मांग',
-      'total_votes': 'कुल नागरिक समर्थन:',
-      'vote_btn': 'इस याचिका का समर्थन करें (Vote)',
-      'voted_msg': 'आपका समर्थन सफलतापूर्वक दर्ज हो गया है!',
     },
   };
 
   static String get(String key, String lang) {
-    return _values[lang]?[key] ?? _values['en']?[key] ?? key;
+    return _values[lang]?[key] ?? _values['gu']?[key] ?? key;
   }
 }
 
@@ -147,16 +132,9 @@ class HomeScreen extends StatelessWidget {
       ),
       builder: (context) {
         final languages = [
-          {'code': 'en', 'name': 'English'},
           {'code': 'gu', 'name': 'ગુજરાતી (Gujarati)'},
           {'code': 'hi', 'name': 'हिन्दी (Hindi)'},
-          {'code': 'mr', 'name': 'मराठी (Marathi)'},
-          {'code': 'bn', 'name': 'বাংলা (Bengali)'},
-          {'code': 'ta', 'name': 'தமிழ் (Tamil)'},
-          {'code': 'te', 'name': 'తెలుగు (Telugu)'},
-          {'code': 'kn', 'name': 'ಕನ್ನಡ (Kannada)'},
-          {'code': 'ml', 'name': 'മലയാളം (Malayalam)'},
-          {'code': 'pa', 'name': 'ਪੰਜਾਬੀ (Punjabi)'},
+          {'code': 'en', 'name': 'English'},
         ];
 
         return Container(
@@ -169,24 +147,22 @@ class HomeScreen extends StatelessWidget {
                 style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               const Divider(),
-              Expanded(
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: languages.length,
-                  itemBuilder: (context, index) {
-                    final item = languages[index];
-                    return ListTile(
-                      title: Text(item['name']!, style: const TextStyle(fontSize: 16)),
-                      trailing: currentLang == item['code']
-                          ? const Icon(Icons.check_circle, color: Color(0xFF138808))
-                          : null,
-                      onTap: () {
-                        onLangChanged(item['code']!);
-                        Navigator.pop(context);
-                      },
-                    );
-                  },
-                ),
+              ListView.builder(
+                shrinkWrap: true,
+                itemCount: languages.length,
+                itemBuilder: (context, index) {
+                  final item = languages[index];
+                  return ListTile(
+                    title: Text(item['name']!, style: const TextStyle(fontSize: 16)),
+                    trailing: currentLang == item['code']
+                        ? const Icon(Icons.check_circle, color: Color(0xFF138808))
+                        : null,
+                    onTap: () {
+                      onLangChanged(item['code']!);
+                      Navigator.pop(context);
+                    },
+                  );
+                },
               ),
             ],
           ),
@@ -201,28 +177,17 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: Row(
           children: [
-            const Icon(Icons.balance, color: Colors.white),
+            const Icon(Icons.campaign, color: Colors.white, size: 28),
             const SizedBox(width: 8),
-            Text(AppStrings.get('app_title', currentLang), style: const TextStyle(color: Colors.white, fontSize: 18)),
+            Text(AppStrings.get('app_title', currentLang),
+                style: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)),
           ],
         ),
         backgroundColor: const Color(0xFF138808),
         actions: [
-          InkWell(
-            onTap: () => _openLanguagePicker(context),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 14.0, vertical: 4.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Icon(Icons.language, size: 26, color: Colors.white),
-                  Text(
-                    AppStrings.get('lang_label', currentLang),
-                    style: const TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
-            ),
+          IconButton(
+            icon: const Icon(Icons.language, color: Colors.white, size: 26),
+            onPressed: () => _openLanguagePicker(context),
           )
         ],
       ),
@@ -237,7 +202,7 @@ class HomeScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(14.0),
                 child: Text(
                   AppStrings.get('disclaimer', currentLang),
-                  style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600, height: 1.4),
+                  style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600, height: 1.4),
                 ),
               ),
             ),
@@ -245,10 +210,12 @@ class HomeScreen extends StatelessWidget {
             ElevatedButton.icon(
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFFFF9933),
-                minimumSize: const Size(double.infinity, 55),
+                minimumSize: const Size(double.infinity, 56),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
               ),
-              icon: const Icon(Icons.edit_note, color: Colors.white, size: 24),
-              label: Text(AppStrings.get('btn_report', currentLang), style: const TextStyle(color: Colors.white, fontSize: 15)),
+              icon: const Icon(Icons.edit_location_alt, color: Colors.white, size: 24),
+              label: Text(AppStrings.get('btn_report', currentLang),
+                  style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold)),
               onPressed: () => Navigator.push(
                 context,
                 MaterialPageRoute(builder: (c) => IssueFormScreen(currentLang: currentLang)),
@@ -258,10 +225,12 @@ class HomeScreen extends StatelessWidget {
             ElevatedButton.icon(
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFF138808),
-                minimumSize: const Size(double.infinity, 55),
+                minimumSize: const Size(double.infinity, 56),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
               ),
               icon: const Icon(Icons.how_to_vote, color: Colors.white, size: 24),
-              label: Text(AppStrings.get('btn_petition', currentLang), style: const TextStyle(color: Colors.white, fontSize: 15)),
+              label: Text(AppStrings.get('btn_petition', currentLang),
+                  style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold)),
               onPressed: () => Navigator.push(
                 context,
                 MaterialPageRoute(builder: (c) => PetitionVotingScreen(currentLang: currentLang)),
@@ -274,6 +243,7 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
+// ----------------- MAP PICKER -----------------
 class MapPickerScreen extends StatefulWidget {
   final LatLng initialLocation;
   const MapPickerScreen({super.key, required this.initialLocation});
@@ -295,7 +265,7 @@ class _MapPickerScreenState extends State<MapPickerScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Pin Drop Location', style: TextStyle(color: Colors.white, fontSize: 18)),
+        title: const Text('નકશા પર પિન મૂકો (Pin Drop)', style: TextStyle(color: Colors.white, fontSize: 18)),
         backgroundColor: const Color(0xFF138808),
         actions: [
           IconButton(
@@ -344,7 +314,7 @@ class _MapPickerScreenState extends State<MapPickerScreen> {
             minimumSize: const Size(double.infinity, 48),
           ),
           icon: const Icon(Icons.check_circle, color: Colors.white),
-          label: const Text('Confirm Location', style: TextStyle(color: Colors.white, fontSize: 16)),
+          label: const Text('આ લોકેશન કન્ફર્મ કરો', style: TextStyle(color: Colors.white, fontSize: 16)),
           onPressed: () => Navigator.pop(context, _selectedLocation),
         ),
       ),
@@ -352,6 +322,7 @@ class _MapPickerScreenState extends State<MapPickerScreen> {
   }
 }
 
+// ----------------- ISSUE REPORT FORM -----------------
 class IssueFormScreen extends StatefulWidget {
   final String currentLang;
   const IssueFormScreen({super.key, required this.currentLang});
@@ -396,7 +367,7 @@ class _IssueFormScreenState extends State<IssueFormScreen> {
   Future<void> _openMapOrGPS() async {
     setState(() => _isLocating = true);
 
-    LatLng targetLocation = const LatLng(23.0225, 72.5714); // Default Ahmedabad/Gujarat
+    LatLng targetLocation = const LatLng(23.0225, 72.5714);
 
     try {
       LocationPermission perm = await Geolocator.checkPermission();
@@ -448,7 +419,8 @@ class _IssueFormScreenState extends State<IssueFormScreen> {
               Card(
                 child: SwitchListTile(
                   activeColor: const Color(0xFF138808),
-                  title: Text(AppStrings.get('anonymous_title', lang), style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+                  title: Text(AppStrings.get('anonymous_title', lang),
+                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
                   subtitle: Text(AppStrings.get('anonymous_sub', lang)),
                   value: _isAnonymous,
                   onChanged: (v) => setState(() => _isAnonymous = v),
@@ -457,14 +429,16 @@ class _IssueFormScreenState extends State<IssueFormScreen> {
               const SizedBox(height: 12),
               TextFormField(
                 controller: _title,
-                decoration: InputDecoration(labelText: AppStrings.get('issue_title', lang), border: const OutlineInputBorder()),
-                validator: (v) => v!.isEmpty ? "Required" : null,
+                decoration: InputDecoration(
+                    labelText: AppStrings.get('issue_title', lang), border: const OutlineInputBorder()),
+                validator: (v) => v!.isEmpty ? "જરૂરી છે" : null,
               ),
               const SizedBox(height: 12),
               TextFormField(
                 controller: _desc,
                 maxLines: 3,
-                decoration: InputDecoration(labelText: AppStrings.get('issue_desc', lang), border: const OutlineInputBorder()),
+                decoration: InputDecoration(
+                    labelText: AppStrings.get('issue_desc', lang), border: const OutlineInputBorder()),
               ),
               const SizedBox(height: 12),
               Row(
@@ -474,6 +448,7 @@ class _IssueFormScreenState extends State<IssueFormScreen> {
                       controller: _loc,
                       decoration: InputDecoration(
                         labelText: AppStrings.get('location_hint', lang),
+                        hintText: "સરનામું લખો અથવા મેપ પરથી પિન કરો",
                         border: const OutlineInputBorder(),
                       ),
                     ),
@@ -500,7 +475,8 @@ class _IssueFormScreenState extends State<IssueFormScreen> {
                           style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFFFF9933)),
                           onPressed: () => _pickImage(true, ImageSource.camera),
                           icon: const Icon(Icons.camera_alt, color: Colors.white, size: 18),
-                          label: Text(AppStrings.get('before_evidence', lang), style: const TextStyle(color: Colors.white, fontSize: 11)),
+                          label: Text(AppStrings.get('before_evidence', lang),
+                              style: const TextStyle(color: Colors.white, fontSize: 11)),
                         ),
                         if (_beforeMedia != null)
                           TextButton(
@@ -518,7 +494,8 @@ class _IssueFormScreenState extends State<IssueFormScreen> {
                           style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF138808)),
                           onPressed: () => _pickImage(false, ImageSource.gallery),
                           icon: const Icon(Icons.photo_library, color: Colors.white, size: 18),
-                          label: Text(AppStrings.get('after_evidence', lang), style: const TextStyle(color: Colors.white, fontSize: 11)),
+                          label: Text(AppStrings.get('after_evidence', lang),
+                              style: const TextStyle(color: Colors.white, fontSize: 11)),
                         ),
                         if (_afterMedia != null)
                           TextButton(
@@ -537,10 +514,12 @@ class _IssueFormScreenState extends State<IssueFormScreen> {
                 label: Text(AppStrings.get('attach_files', lang)),
               ),
               Wrap(
-                children: _files.map((f) => Chip(
-                  label: Text(f.name, style: const TextStyle(fontSize: 11)),
-                  onDeleted: () => setState(() => _files.remove(f)),
-                )).toList(),
+                children: _files
+                    .map((f) => Chip(
+                          label: Text(f.name, style: const TextStyle(fontSize: 11)),
+                          onDeleted: () => setState(() => _files.remove(f)),
+                        ))
+                    .toList(),
               ),
               const SizedBox(height: 24),
               SizedBox(
@@ -555,7 +534,8 @@ class _IssueFormScreenState extends State<IssueFormScreen> {
                       );
                     }
                   },
-                  child: Text(AppStrings.get('submit_btn', lang), style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold)),
+                  child: Text(AppStrings.get('submit_btn', lang),
+                      style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold)),
                 ),
               ),
             ],
@@ -566,6 +546,38 @@ class _IssueFormScreenState extends State<IssueFormScreen> {
   }
 }
 
+// ----------------- CITIZEN ACCOUNTABILITY PETITION MODEL -----------------
+class PetitionItem {
+  final String title;
+  final String category;
+  final String primaryOfficer;     // મૂળ જવાબદાર વ્યક્તિ/હોદ્દો
+  final String inChargeOfficer;     // ચાર્જ/વૈકલ્પિક અધિકારી (જો રજા પર હોય તો)
+  final String superiorOfficer;     // ઉપરના વરિષ્ઠ અધિકારી (Collector/Commissioner)
+  final String departmentPost;      // વિભાગ / કચેરી
+  final String officialEmails;      // સત્તાવાર ઈમેલ (પુરાવા માટે)
+  final String officialContacts;    // સત્તાવાર ફોન નંબર
+  final String allegationReason;    // શું વાંક / બેદરકારી છે
+  final String dateTimeString;      // તારીખ અને સમય
+  int votes;
+  bool isVoted;
+
+  PetitionItem({
+    required this.title,
+    required this.category,
+    required this.primaryOfficer,
+    this.inChargeOfficer = '',
+    required this.superiorOfficer,
+    required this.departmentPost,
+    required this.officialEmails,
+    required this.officialContacts,
+    required this.allegationReason,
+    required this.dateTimeString,
+    required this.votes,
+    this.isVoted = false,
+  });
+}
+
+// ----------------- PETITION SCREEN (LIST + VOTING + CREATION) -----------------
 class PetitionVotingScreen extends StatefulWidget {
   final String currentLang;
   const PetitionVotingScreen({super.key, required this.currentLang});
@@ -575,66 +587,606 @@ class PetitionVotingScreen extends StatefulWidget {
 }
 
 class _PetitionVotingScreenState extends State<PetitionVotingScreen> {
-  int voteCount = 142380;
-  bool hasVoted = false;
+  final List<PetitionItem> _petitions = [
+    PetitionItem(
+      title: "વારંવાર રજૂઆત છતાં બિસ્માર રસ્તાઓ અને ગટરનું કામ ન થવા બાબત",
+      category: "રસ્તા / ગટર / ખાડા",
+      primaryOfficer: "કાર્યપાલક ઇજનેર / વોર્ડ કોર્પોરેટર",
+      inChargeOfficer: "નાયબ કાર્યપાલક ઇજનેર (ચાર્જ ઓફિસર)",
+      superiorOfficer: "મ્યુનિસિપલ કમિશનરશ્રી / જિલ્લા કલેક્ટર",
+      departmentPost: "મ્યુનિસિપલ કોર્પોરેશન - PWD શાખા",
+      officialEmails: "commissioner-office@gujarat.gov.in, pwd-eng@nic.in",
+      officialContacts: "079-27550000, 1800-233-1000",
+      allegationReason:
+          "છેલ્લા ૬ મહિનાથી ૫૦૦ પરિવારો દ્વારા લેખિત રજૂઆત છતાં એકબીજા પર ઢોળી કામ અટકાવી રાખ્યું છે અને ખોટા ધક્કા ખવડાવે છે.",
+      dateTimeString: "05/10/2026, 11:30 AM",
+      votes: 142381,
+    ),
+    PetitionItem(
+      title: "પ્રાથમિક આરોગ્ય કેન્દ્રમાં ડોક્ટરની ગેરહાજરી અને દવાનો અભાવ",
+      category: "આરોગ્ય / હોસ્પિટલ",
+      primaryOfficer: "મેડિકલ ઓફિસર (PHC ઇન્ચાર્જ)",
+      inChargeOfficer: "તાલુકા હેલ્થ ઓફિસર (THO)",
+      superiorOfficer: "મુખ્ય જિલ્લા તબીબી અધિકારી (CDHO) / DDO",
+      departmentPost: "જિલ્લા આરોગ્ય શાખા / તાલુકા પંચાયત",
+      officialEmails: "cdho-health@gujarat.gov.in, ddo-office@nic.in",
+      officialContacts: "02712-232000, 104 হেল্পলাইন",
+      allegationReason:
+          "હોસ્પિટલમાં નિયમિત સમય પર હાજર ન રહેવું અને 'આ અમારું કામ નથી' કહી દર્દીઓને જિલ્લા સિવિલમાં ધક્કા ખવડાવવા.",
+      dateTimeString: "04/10/2026, 04:15 PM",
+      votes: 89450,
+    ),
+  ];
+
+  void _showNoticeSentDialog(PetitionItem p) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: const Row(
+          children: [
+            Icon(Icons.verified, color: Color(0xFF138808), size: 28),
+            SizedBox(width: 8),
+            Text("સત્તાવાર ડિસ્પેચ પુરાવો", style: TextStyle(fontSize: 16)),
+          ],
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              "આ પિટિશનની સંપૂર્ણ વિગત નીચે મુજબના સત્તાવાર સરકારી ઈમેલ અને ફોન નંબર પર નોટિસ સ્વરૂપે મોકલી આપવા માટે નોંધાઈ ગઈ છે:",
+              style: TextStyle(fontSize: 13, height: 1.4),
+            ),
+            const SizedBox(height: 12),
+            Container(
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: const Color(0xFFFFF3E0),
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: const Color(0xFFFF9933)),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text("📧 સત્તાવાર ઈમેલ: ${p.officialEmails}",
+                      style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.black87)),
+                  const SizedBox(height: 6),
+                  Text("📞 સંપર્ક નંબર: ${p.officialContacts}",
+                      style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.black87)),
+                  const SizedBox(height: 6),
+                  Text("🏛️ વરિષ્ઠ સુપરવાઇઝર: ${p.superiorOfficer}",
+                      style: const TextStyle(fontSize: 12, color: Colors.black87)),
+                  if (p.inChargeOfficer.isNotEmpty) ...[
+                    const SizedBox(height: 4),
+                    Text("🔄 ચાર્જ ઓફિસર: ${p.inChargeOfficer}",
+                        style: const TextStyle(fontSize: 12, color: Colors.black87)),
+                  ],
+                ],
+              ),
+            ),
+            const SizedBox(height: 10),
+            const Text(
+              "હવે કોઈ પણ અધિકારી એવું બહાનું નહીં કાઢી શકે કે 'અમને ખબર નથી' અથવા 'અમે એપ નથી વાપરતા', કારણ કે આ રેકોર્ડ કાયમી સરકારી ઈમેલ લોગમાં પુરાવા સાથે દાખલ થયો છે!",
+              style: TextStyle(fontSize: 12, color: Color(0xFF138808), fontWeight: FontWeight.bold),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx),
+            child: const Text("ઠીક છે (બંધ કરો)", style: TextStyle(color: Color(0xFF138808), fontWeight: FontWeight.bold)),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _showCreatePetitionDialog() {
+    final titleCtrl = TextEditingController();
+    final primaryOfficerCtrl = TextEditingController();
+    final inChargeCtrl = TextEditingController();
+    final superiorCtrl = TextEditingController();
+    final emailCtrl = TextEditingController();
+    final phoneCtrl = TextEditingController();
+    final reasonCtrl = TextEditingController();
+
+    final customCategoryCtrl = TextEditingController();
+    final customDeptCtrl = TextEditingController();
+
+    bool hasInCharge = false;
+
+    String selectedCategory = "પાણી પુરવઠો (Water Supply)";
+    String selectedDept = "મ્યુનિસિપલ કોર્પોરેશન / નગરપાલિકા";
+
+    final categories = [
+      "પાણી પુરવઠો (Water Supply)",
+      "રસ્તા / ગટર / ખાડા (Roads & Drainage)",
+      "વીજળી / લાઈટ (Electricity/GEB)",
+      "આરોગ્ય / હોસ્પિટલ (Health/Hospital)",
+      "શિક્ષણ / શાળા / કોલેજ (Education/Schools)",
+      "પોલીસ / કાયદો-વ્યવસ્થા (Police/Safety)",
+      "જમીન / મહેસૂલ / પંચાયત (Revenue/Land)",
+      "લાંચ / ભ્રષ્ટાચાર / ગેરરીતિ (Corruption)",
+      "અન્ય સમસ્યા (Other Issue)",
+    ];
+
+    final departments = [
+      "મ્યુનિસિપલ કોર્પોરેશન / નગરપાલિકા",
+      "ગ્રામ પંચાયત / તાલુકા પંચાયત",
+      "કલેક્ટર કચેરી / મામલતદાર ઓફિસ",
+      "વીજળી બોર્ડ (GEB / Discom)",
+      "પોલીસ તંત્ર (Police Department)",
+      "પી.ડબલ્યુ.ડી. (PWD - માર્ગ-મકાન)",
+      "જિલ્લા આરોગ્ય વિભાગ / સિવિલ",
+      "શિક્ષણ વિભાગ / DEO કચેરી",
+      "અન્ય કચેરી / વિભાગ (Other Department)",
+    ];
+
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (ctx) {
+        return StatefulBuilder(
+          builder: (context, setModalState) {
+            return Padding(
+              padding: EdgeInsets.only(
+                bottom: MediaQuery.of(ctx).viewInsets.bottom + 16,
+                left: 16,
+                right: 16,
+                top: 20,
+              ),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Row(
+                      children: [
+                        Icon(Icons.shield, color: Color(0xFF138808), size: 26),
+                        SizedBox(width: 8),
+                        Text(
+                          "સત્તાવાર જન પિટિશન નોંધાવો",
+                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                    const Text(
+                      "ધક્કામુક્કી અને બહાનાબાજી બંધ કરવા ત્રણેય સ્તરના અધિકારીઓને સાથે ટેગ કરો:",
+                      style: TextStyle(fontSize: 12, color: Colors.black54),
+                    ),
+                    const SizedBox(height: 14),
+
+                    // ૧. મુખ્ય વિષય
+                    TextField(
+                      controller: titleCtrl,
+                      decoration: const InputDecoration(
+                        labelText: "મુખ્ય વિષય / મુદ્દો",
+                        hintText: "દા.ત. ૬ મહિનાથી રોડનું કામ અટકાવી ધક્કા ખવડાવે છે",
+                        border: OutlineInputBorder(),
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+
+                    // ૨. સમસ્યાનો પ્રકાર (Dropdown + Other)
+                    DropdownButtonFormField<String>(
+                      value: selectedCategory,
+                      decoration: const InputDecoration(
+                        labelText: "૧. સમસ્યાનો પ્રકાર પસંદ કરો",
+                        border: OutlineInputBorder(),
+                      ),
+                      isExpanded: true,
+                      items: categories.map((cat) {
+                        return DropdownMenuItem(value: cat, child: Text(cat, style: const TextStyle(fontSize: 14)));
+                      }).toList(),
+                      onChanged: (val) {
+                        setModalState(() {
+                          selectedCategory = val!;
+                        });
+                      },
+                    ),
+                    if (selectedCategory == "અન્ય સમસ્યા (Other Issue)") ...[
+                      const SizedBox(height: 8),
+                      TextField(
+                        controller: customCategoryCtrl,
+                        decoration: const InputDecoration(
+                          labelText: "અન્ય સમસ્યાનું નામ લખો",
+                          hintText: "તમારી વિશિષ્ટ સમસ્યા લખો...",
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
+                    ],
+                    const SizedBox(height: 12),
+
+                    // ૩. કચેરી / વિભાગ (Dropdown + Other)
+                    DropdownButtonFormField<String>(
+                      value: selectedDept,
+                      decoration: const InputDecoration(
+                        labelText: "૨. સંબંધિત સરકારી કચેરી / ખાતું",
+                        border: OutlineInputBorder(),
+                      ),
+                      isExpanded: true,
+                      items: departments.map((dept) {
+                        return DropdownMenuItem(value: dept, child: Text(dept, style: const TextStyle(fontSize: 14)));
+                      }).toList(),
+                      onChanged: (val) {
+                        setModalState(() {
+                          selectedDept = val!;
+                        });
+                      },
+                    ),
+                    if (selectedDept == "અન્ય કચેરી / વિભાગ (Other Department)") ...[
+                      const SizedBox(height: 8),
+                      TextField(
+                        controller: customDeptCtrl,
+                        decoration: const InputDecoration(
+                          labelText: "અન્ય કચેરી / વિભાગનું નામ લખો",
+                          hintText: "દા.ત. પ્રદૂષણ નિયંત્રણ બોર્ડ (GPCB)...",
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
+                    ],
+                    const SizedBox(height: 12),
+
+                    // ૪. મૂળ અધિકારી/નેતાનું પદ
+                    TextField(
+                      controller: primaryOfficerCtrl,
+                      decoration: const InputDecoration(
+                        labelText: "૩. મૂળ જવાબદાર અધિકારી / નેતા",
+                        hintText: "દા.ત. કાર્યપાલક ઇજનેર / સંબંધિત ધારાસભ્ય",
+                        border: OutlineInputBorder(),
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+
+                    // ચાર્જ ઓફિસર સ્વિચ
+                    SwitchListTile(
+                      contentPadding: EdgeInsets.zero,
+                      activeColor: const Color(0xFF138808),
+                      title: const Text("અધિકારી રજા પર છે / ચાર્જ બીજા પાસે છે?",
+                          style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
+                      value: hasInCharge,
+                      onChanged: (v) => setModalState(() => hasInCharge = v),
+                    ),
+                    if (hasInCharge) ...[
+                      TextField(
+                        controller: inChargeCtrl,
+                        decoration: const InputDecoration(
+                          labelText: "ચાર્જ અધિકારી / લિંક ઓફિસરનું પદ/નામ",
+                          hintText: "દા.ત. નાયબ ઇજનેર (ચાર્જ)",
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                    ],
+
+                    // ૫. ઉપરી વરિષ્ઠ અધિકારી (Boss)
+                    TextField(
+                      controller: superiorCtrl,
+                      decoration: const InputDecoration(
+                        labelText: "૪. ઉપરી વરિષ્ઠ અધિકારી (સુપરવાઇઝર / બોસ)",
+                        hintText: "દા.ત. જિલ્લા કલેક્ટર / મ્યુનિસિપલ કમિશનર / DDO",
+                        border: OutlineInputBorder(),
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+
+                    // ૬. સત્તાવાર ઈમેલ (પુરાવા માટે)
+                    TextField(
+                      controller: emailCtrl,
+                      decoration: const InputDecoration(
+                        labelText: "૫. કચેરી/અધિકારીના સત્તાવાર ઈમેલ (Email IDs)",
+                        hintText: "દા.ત. collector-amd@gujarat.gov.in (અલ્પવિરામથી અલગ કરો)",
+                        border: OutlineInputBorder(),
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+
+                    // ૭. ફોન નંબર / હેલ્પલાઇન
+                    TextField(
+                      controller: phoneCtrl,
+                      decoration: const InputDecoration(
+                        labelText: "૬. સત્તાવાર ફોન નંબર / હેલ્પલાઇન",
+                        hintText: "દા.ત. 079-xxxxxxx, 1800-xxx-xxxx",
+                        border: OutlineInputBorder(),
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+
+                    // ૮. શું વાંક છે?
+                    TextField(
+                      controller: reasonCtrl,
+                      maxLines: 3,
+                      decoration: const InputDecoration(
+                        labelText: "૭. શું વાંક છે? (ધક્કાબાજી / બેદરકારીની વિગત)",
+                        hintText: "કેમ કામ નથી કરતા અને શું જવાબ આપે છે તે સ્પષ્ટ લખો...",
+                        border: OutlineInputBorder(),
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+
+                    SizedBox(
+                      width: double.infinity,
+                      height: 50,
+                      child: ElevatedButton.icon(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFFFF9933),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                        ),
+                        icon: const Icon(Icons.send_and_archive, color: Colors.white),
+                        label: const Text("સત્તાવાર નોટિસ સાથે લાઈવ કરો",
+                            style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold)),
+                        onPressed: () {
+                          if (titleCtrl.text.isNotEmpty && primaryOfficerCtrl.text.isNotEmpty) {
+                            final now = DateTime.now();
+                            final formattedDate =
+                                "${now.day.toString().padLeft(2, '0')}/${now.month.toString().padLeft(2, '0')}/${now.year}, ${now.hour.toString().padLeft(2, '0')}:${now.minute.toString().padLeft(2, '0')}";
+
+                            final finalCategory = selectedCategory.contains("Other")
+                                ? (customCategoryCtrl.text.isNotEmpty ? customCategoryCtrl.text : "અન્ય મુદ્દો")
+                                : selectedCategory;
+
+                            final finalDept = selectedDept.contains("Other")
+                                ? (customDeptCtrl.text.isNotEmpty ? customDeptCtrl.text : "અન્ય વિભાગ")
+                                : selectedDept;
+
+                            setState(() {
+                              _petitions.insert(
+                                0,
+                                PetitionItem(
+                                  title: titleCtrl.text,
+                                  category: finalCategory,
+                                  primaryOfficer: primaryOfficerCtrl.text,
+                                  inChargeOfficer: hasInCharge ? inChargeCtrl.text : '',
+                                  superiorOfficer: superiorCtrl.text.isNotEmpty ? superiorCtrl.text : "જિલ્લા કલેક્ટર કચેરી",
+                                  departmentPost: finalDept,
+                                  officialEmails: emailCtrl.text.isNotEmpty ? emailCtrl.text : "official-desk@gujarat.gov.in",
+                                  officialContacts: phoneCtrl.text.isNotEmpty ? phoneCtrl.text : "સ્થાનિક સરકારી ટોલ-ફ્રી / કન્ટ્રોલ રૂમ",
+                                  allegationReason: reasonCtrl.text.isNotEmpty
+                                      ? reasonCtrl.text
+                                      : "પ્રજાની રજૂઆત ન સાંભળવી, ખોટા ધક્કા ખવડાવવા અને ફરજમાં ગંભીર બેદરકારી.",
+                                  dateTimeString: formattedDate,
+                                  votes: 1,
+                                  isVoted: true,
+                                ),
+                              );
+                            });
+                            Navigator.pop(ctx);
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text("પિટિશન અને સત્તાવાર નોટિસ રેકોર્ડ થઈ ગઈ છે!")),
+                            );
+                          }
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
-    final lang = widget.currentLang;
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppStrings.get('btn_petition', lang), style: const TextStyle(color: Colors.white)),
+        title: const Text('જન જવાબદેહી પિટિશન અને વોટિંગ', style: TextStyle(color: Colors.white, fontSize: 17)),
         backgroundColor: const Color(0xFF138808),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Card(
-          elevation: 3,
-          child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Chip(
-                  label: Text(AppStrings.get('petition_badge', lang), style: const TextStyle(color: Colors.white, fontSize: 11)),
-                  backgroundColor: const Color(0xFFFF9933),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  AppStrings.get('petition_title', lang),
-                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                ),
-                const Divider(height: 24),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(AppStrings.get('total_votes', lang), style: const TextStyle(fontWeight: FontWeight.bold)),
-                    Text("$voteCount", style: const TextStyle(fontWeight: FontWeight.bold, color: Color(0xFF138808), fontSize: 18)),
-                  ],
-                ),
-                const SizedBox(height: 16),
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton.icon(
-                    style: ElevatedButton.styleFrom(backgroundColor: hasVoted ? Colors.grey : const Color(0xFFFF9933)),
-                    onPressed: hasVoted ? null : () {
-                      setState(() {
-                        voteCount++;
-                        hasVoted = true;
-                      });
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text(AppStrings.get('voted_msg', lang))),
-                      );
-                    },
-                    icon: const Icon(Icons.thumb_up, color: Colors.white),
-                    label: Text(AppStrings.get('vote_btn', lang), style: const TextStyle(color: Colors.white)),
+      floatingActionButton: FloatingActionButton.extended(
+        backgroundColor: const Color(0xFFFF9933),
+        icon: const Icon(Icons.add, color: Colors.white),
+        label: const Text("નવી પિટિશન", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+        onPressed: _showCreatePetitionDialog,
+      ),
+      body: ListView.builder(
+        padding: const EdgeInsets.fromLTRB(14, 14, 14, 80),
+        itemCount: _petitions.length,
+        itemBuilder: (context, index) {
+          final p = _petitions[index];
+          return Card(
+            elevation: 3,
+            margin: const EdgeInsets.only(bottom: 16),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            child: Padding(
+              padding: const EdgeInsets.all(14),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFFFEEDB),
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                        child: Text(
+                          p.category,
+                          style: const TextStyle(color: Color(0xFFD35400), fontSize: 11, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      Row(
+                        children: [
+                          const Icon(Icons.access_time, size: 14, color: Colors.grey),
+                          const SizedBox(width: 4),
+                          Text(
+                            p.dateTimeString,
+                            style: const TextStyle(fontSize: 11, color: Colors.black54, fontWeight: FontWeight.w500),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
-                ),
-              ],
+                  const SizedBox(height: 10),
+                  Text(
+                    p.title,
+                    style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black87),
+                  ),
+                  const Divider(height: 18),
+
+                  // મૂળ અધિકારી
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Icon(Icons.person_pin, size: 18, color: Colors.red),
+                      const SizedBox(width: 6),
+                      Expanded(
+                        child: RichText(
+                          text: TextSpan(
+                            style: const TextStyle(fontSize: 13, color: Colors.black87),
+                            children: [
+                              const TextSpan(text: "૧. મૂળ જવાબદાર: ", style: TextStyle(fontWeight: FontWeight.bold)),
+                              TextSpan(text: "${p.primaryOfficer} (${p.departmentPost})"),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  // ચાર્જ અધિકારી (જો હોય તો)
+                  if (p.inChargeOfficer.isNotEmpty) ...[
+                    const SizedBox(height: 6),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Icon(Icons.swap_horiz, size: 18, color: Colors.orange),
+                        const SizedBox(width: 6),
+                        Expanded(
+                          child: RichText(
+                            text: TextSpan(
+                              style: const TextStyle(fontSize: 13, color: Colors.black87),
+                              children: [
+                                const TextSpan(text: "૨. હાલનો ચાર્જ: ", style: TextStyle(fontWeight: FontWeight.bold)),
+                                TextSpan(text: "${p.inChargeOfficer} (ચાર્જ સંભાળનાર)"),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+
+                  // ઉપરી બોસ
+                  const SizedBox(height: 6),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Icon(Icons.account_balance, size: 18, color: Color(0xFF138808)),
+                      const SizedBox(width: 6),
+                      Expanded(
+                        child: RichText(
+                          text: TextSpan(
+                            style: const TextStyle(fontSize: 13, color: Colors.black87),
+                            children: [
+                              const TextSpan(text: "૩. વરિષ્ઠ સુપરવાઇઝર: ", style: TextStyle(fontWeight: FontWeight.bold)),
+                              TextSpan(text: p.superiorOfficer),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  // શું વાંક છે?
+                  const SizedBox(height: 8),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Icon(Icons.report_problem, size: 18, color: Color(0xFFFF9933)),
+                      const SizedBox(width: 6),
+                      Expanded(
+                        child: RichText(
+                          text: TextSpan(
+                            style: const TextStyle(fontSize: 13, color: Colors.black87),
+                            children: [
+                              const TextSpan(
+                                  text: "ધક્કાબાજી / વાંક: ",
+                                  style: TextStyle(fontWeight: FontWeight.bold, color: Colors.redAccent)),
+                              TextSpan(text: p.allegationReason),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  const SizedBox(height: 10),
+
+                  // સત્તાવાર ડિસ્પેચ બટન
+                  InkWell(
+                    onTap: () => _showNoticeSentDialog(p),
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFE8F5E9),
+                        borderRadius: BorderRadius.circular(6),
+                        border: Border.all(color: const Color(0xFF138808)),
+                      ),
+                      child: const Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(Icons.mark_email_read, size: 16, color: Color(0xFF138808)),
+                          SizedBox(width: 6),
+                          Text("સત્તાવાર ઈમેલ અને ફોન નોટિસ પુરાવો જુઓ",
+                              style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: Color(0xFF138808))),
+                        ],
+                      ),
+                    ),
+                  ),
+
+                  const Divider(height: 22),
+
+                  // વોટિંગ
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text("કુલ નાગરિક સમર્થન:", style: TextStyle(fontSize: 11, color: Colors.grey)),
+                          Text(
+                            "${p.votes} વોટ",
+                            style: const TextStyle(fontWeight: FontWeight.bold, color: Color(0xFF138808), fontSize: 18),
+                          ),
+                        ],
+                      ),
+                      ElevatedButton.icon(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: p.isVoted ? Colors.grey : const Color(0xFFFF9933),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                        ),
+                        onPressed: p.isVoted
+                            ? null
+                            : () {
+                                setState(() {
+                                  p.votes++;
+                                  p.isVoted = true;
+                                });
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(content: Text("તમારો વિરોધ/સમર્થન વોટ નોંધાઈ ગયો છે!")),
+                                );
+                              },
+                        icon: Icon(p.isVoted ? Icons.check : Icons.thumb_up, color: Colors.white, size: 18),
+                        label: Text(
+                          p.isVoted ? "વોટ આપેલ છે" : "સમર્થન આપો (Vote)",
+                          style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
-          ),
-        ),
+          );
+        },
       ),
     );
   }
