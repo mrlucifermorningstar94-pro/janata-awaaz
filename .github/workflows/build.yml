@@ -23,14 +23,14 @@ jobs:
           flutter-version: '3.24.5'
           channel: 'stable'
 
-      - name: Create Android Scaffold
+      - name: Create Android Project
         run: flutter create . --platforms=android --project-name janata_awaaz --org com.janata.awaaz
 
-      - name: Enforce SDK Versions on All Plugins
+      - name: Patch Root Settings for Plugins
         run: |
-          cat << 'EOF' >> android/app/build.gradle
-          gradle.projectsEvaluated {
-              subprojects {
+          cat << 'EOF' >> android/build.gradle
+          subprojects {
+              afterEvaluate { project ->
                   if (project.hasProperty("android")) {
                       android {
                           compileSdkVersion 35
