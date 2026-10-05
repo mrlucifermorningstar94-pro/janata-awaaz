@@ -24,20 +24,13 @@ jobs:
 
       - name: Build Clean Flutter App
         run: |
-          # 1. ફ્લટરનો તાજો અને સાચો પ્રોજેક્ટ અલગ ફોલ્ડરમાં બનાવો
           flutter create -t app --org com.janata.awaaz app_workspace
-          
-          # 2. તમારા મૂળ કોડ અને ડિપેન્ડન્સી ફાઇલોને નવા પ્રોજેક્ટમાં ખસેડો
           cp lib/main.dart app_workspace/lib/main.dart
           cp pubspec.yaml app_workspace/pubspec.yaml
-          
-          # 3. એન્ડ્રોઇડ સેટિંગ્સ ફિક્સ કરો
           cd app_workspace
           echo "flutter.minSdkVersion=21" >> android/local.properties
           echo "flutter.compileSdkVersion=36" >> android/local.properties
-          echo "android.disableMinCompileSdkCheck=true" >> android/gradle.properties
-          
-          # 4. ડિપેન્ડન્સી લાવી APK બિલ્ડ કરો
+          echo "flutter.targetSdkVersion=36" >> android/local.properties
           flutter pub get
           flutter build apk --debug
 
