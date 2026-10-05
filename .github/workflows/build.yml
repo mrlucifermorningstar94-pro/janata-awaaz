@@ -22,10 +22,9 @@ jobs:
         with:
           channel: 'stable'
 
-      - name: Generate Android Project and Fix MinSdk
+      - name: Generate Android Project and Update SDK Settings
         run: |
           flutter create . --platforms=android --org com.janata.awaaz
-          # build.gradle અને build.gradle.kts બંનેમાં સીધું 21 લખી દેશે
           python3 -c "
           import os
           for root, dirs, files in os.walk('android'):
@@ -34,8 +33,12 @@ jobs:
                       p = os.path.join(root, f)
                       with open(p, 'r') as file:
                           content = file.read()
+                      content = content.replace('flutter.compileSdkVersion', '36')
+                      content = content.replace('compileSdk = flutter.compileSdkVersion', 'compileSdk = 36')
+                      content = content.replace('compileSdkVersion flutter.compileSdkVersion', 'compileSdkVersion 36')
                       content = content.replace('flutter.minSdkVersion', '21')
-                      content = content.replace('minSdk = 16', 'minSdk = 21')
+                      content = content.replace('minSdk = flutter.minSdkVersion', 'minSdk = 21')
+                      content = content.replace('minSdkVersion flutter.minSdkVersion', 'minSdkVersion 21')
                       with open(p, 'w') as file:
                           file.write(content)
           "
