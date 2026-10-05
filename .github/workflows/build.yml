@@ -17,7 +17,7 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Set up Flutter Stable
+      - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.22.3'
@@ -30,6 +30,13 @@ jobs:
           cp pubspec.yaml app_workspace/pubspec.yaml
           
           cd app_workspace
+
+          # 1. Update Kotlin to 1.9.10 in settings.gradle
+          sed -i 's/id "org.jetbrains.kotlin.android" version "[^"]*"/id "org.jetbrains.kotlin.android" version "1.9.10"/' android/settings.gradle || true
+
+          # 2. Add ext.kotlin_version fallback
+          sed -i "s/ext.kotlin_version = .*/ext.kotlin_version = '1.9.10'/" android/build.gradle || true
+
           flutter pub get
           flutter build apk --debug
 
