@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:latlong2/latlong.dart';
 
 void main() {
   runApp(const JanataAwaazApp());
@@ -272,6 +274,84 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
+class MapPickerScreen extends StatefulWidget {
+  final LatLng initialLocation;
+  const MapPickerScreen({super.key, required this.initialLocation});
+
+  @override
+  State<MapPickerScreen> createState() => _MapPickerScreenState();
+}
+
+class _MapPickerScreenState extends State<MapPickerScreen> {
+  late LatLng _selectedLocation;
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedLocation = widget.initialLocation;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Pin Drop Location', style: TextStyle(color: Colors.white, fontSize: 18)),
+        backgroundColor: const Color(0xFF138808),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.check, color: Colors.white, size: 28),
+            onPressed: () => Navigator.pop(context, _selectedLocation),
+          ),
+        ],
+      ),
+      body: FlutterMap(
+        options: MapOptions(
+          initialCenter: _selectedLocation,
+          initialZoom: 15.0,
+          onTap: (tapPosition, point) {
+            setState(() {
+              _selectedLocation = point;
+            });
+          },
+        ),
+        children: [
+          TileLayer(
+            urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+            userAgentPackageName: 'com.janata.awaaz',
+          ),
+          MarkerLayer(
+            markers: [
+              Marker(
+                point: _selectedLocation,
+                width: 50,
+                height: 50,
+                child: const Icon(
+                  Icons.location_on,
+                  size: 45,
+                  color: Colors.red,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+      bottomNavigationBar: Container(
+        color: Colors.white,
+        padding: const EdgeInsets.all(12),
+        child: ElevatedButton.icon(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: const Color(0xFFFF9933),
+            minimumSize: const Size(double.infinity, 48),
+          ),
+          icon: const Icon(Icons.check_circle, color: Colors.white),
+          label: const Text('Confirm Location', style: TextStyle(color: Colors.white, fontSize: 16)),
+          onPressed: () => Navigator.pop(context, _selectedLocation),
+        ),
+      ),
+    );
+  }
+}
+
 class IssueFormScreen extends StatefulWidget {
   final String currentLang;
   const IssueFormScreen({super.key, required this.currentLang});
@@ -297,8 +377,11 @@ class _IssueFormScreenState extends State<IssueFormScreen> {
     final XFile? file = await _picker.pickImage(source: source, imageQuality: 100);
     if (file != null) {
       setState(() {
-        if (isBefore) _beforeMedia = File(file.path);
-        else _afterMedia = File(file.path);
+        if (isBefore) {
+          _beforeMedia = File(file.path);
+        } else {
+          _afterMedia = File(file.path);
+        }
       });
     }
   }
@@ -310,18 +393,40 @@ class _IssueFormScreenState extends State<IssueFormScreen> {
     }
   }
 
-  Future<void> _getGPS() async {
+  Future<void> _openMapOrGPS() async {
     setState(() => _isLocating = true);
-    LocationPermission perm = await Geolocator.checkPermission();
-    if (perm == LocationPermission.denied) perm = await Geolocator.requestPermission();
-    if (perm == LocationPermission.whileInUse || perm == LocationPermission.always) {
-      Position p = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+
+    LatLng targetLocation = const LatLng(23.0225, 72.5714); // Default Ahmedabad/Gujarat
+
+    try {
+      LocationPermission perm = await Geolocator.checkPermission();
+      if (perm == LocationPermission.denied) {
+        perm = await Geolocator.requestPermission();
+      }
+      if (perm == LocationPermission.whileInUse || perm == LocationPermission.always) {
+        Position p = await Geolocator.getCurrentPosition(
+          desiredAccuracy: LocationAccuracy.high,
+          timeLimit: const Duration(seconds: 4),
+        );
+        targetLocation = LatLng(p.latitude, p.longitude);
+      }
+    } catch (_) {}
+
+    setState(() => _isLocating = false);
+
+    if (!mounted) return;
+
+    final LatLng? picked = await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (c) => MapPickerScreen(initialLocation: targetLocation),
+      ),
+    );
+
+    if (picked != null) {
       setState(() {
-        _loc.text = "${p.latitude}, ${p.longitude}";
-        _isLocating = false;
+        _loc.text = "${picked.latitude.toStringAsFixed(6)}, ${picked.longitude.toStringAsFixed(6)}";
       });
-    } else {
-      setState(() => _isLocating = false);
     }
   }
 
@@ -367,12 +472,21 @@ class _IssueFormScreenState extends State<IssueFormScreen> {
                   Expanded(
                     child: TextFormField(
                       controller: _loc,
-                      decoration: InputDecoration(labelText: AppStrings.get('location_hint', lang), border: const OutlineInputBorder()),
+                      decoration: InputDecoration(
+                        labelText: AppStrings.get('location_hint', lang),
+                        border: const OutlineInputBorder(),
+                      ),
                     ),
                   ),
                   IconButton(
-                    icon: _isLocating ? const CircularProgressIndicator() : const Icon(Icons.my_location, color: Color(0xFF138808)),
-                    onPressed: _getGPS,
+                    icon: _isLocating
+                        ? const SizedBox(
+                            width: 24,
+                            height: 24,
+                            child: CircularProgressIndicator(strokeWidth: 2),
+                          )
+                        : const Icon(Icons.map, color: Color(0xFF138808), size: 30),
+                    onPressed: _openMapOrGPS,
                   ),
                 ],
               ),
