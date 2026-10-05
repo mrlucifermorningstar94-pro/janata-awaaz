@@ -17,7 +17,7 @@ jobs:
           distribution: 'zulu'
           java-version: '17'
 
-      - name: Set up Flutter Stable
+      - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.24.5'
@@ -26,11 +26,23 @@ jobs:
       - name: Create Android Scaffold
         run: flutter create . --platforms=android --project-name janata_awaaz --org com.janata.awaaz
 
-      - name: Fix MinSdk Direct
+      - name: Enforce SDK Versions on All Plugins
         run: |
-          sed -i 's/minSdkVersion = flutter.minSdkVersion/minSdkVersion = 21/g' android/app/build.gradle* || true
-          sed -i 's/minSdkVersion flutter.minSdkVersion/minSdkVersion 21/g' android/app/build.gradle* || true
-          sed -i 's/minSdk = flutter.minSdkVersion/minSdk = 21/g' android/app/build.gradle* || true
+          cat << 'EOF' >> android/app/build.gradle
+          gradle.projectsEvaluated {
+              subprojects {
+                  if (project.hasProperty("android")) {
+                      android {
+                          compileSdkVersion 35
+                          defaultConfig {
+                              minSdkVersion 21
+                              targetSdkVersion 35
+                          }
+                      }
+                  }
+              }
+          }
+          EOF
 
       - name: Install dependencies
         run: flutter pub get
