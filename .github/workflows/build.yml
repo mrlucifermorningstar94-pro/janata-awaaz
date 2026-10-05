@@ -22,16 +22,29 @@ jobs:
         with:
           channel: 'stable'
 
-      - name: Generate Android Project
-        run: flutter create . --platforms=android --org com.janata.awaaz
+      - name: Generate Android Project and Fix MinSdk
+        run: |
+          flutter create . --platforms=android --org com.janata.awaaz
+          # build.gradle અને build.gradle.kts બંનેમાં સીધું 21 લખી દેશે
+          python3 -c "
+          import os
+          for root, dirs, files in os.walk('android'):
+              for f in files:
+                  if f.startswith('build.gradle'):
+                      p = os.path.join(root, f)
+                      with open(p, 'r') as file:
+                          content = file.read()
+                      content = content.replace('flutter.minSdkVersion', '21')
+                      content = content.replace('minSdk = 16', 'minSdk = 21')
+                      with open(p, 'w') as file:
+                          file.write(content)
+          "
 
       - name: Install dependencies
         run: flutter pub get
 
-      - name: Build APK with MinSdk 21
-        run: |
-          echo "flutter.minSdkVersion=21" >> android/local.properties
-          flutter build apk --debug
+      - name: Build APK
+        run: flutter build apk --debug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
