@@ -24,7 +24,7 @@ jobs:
           channel: 'stable'
 
       - name: Create Android Scaffold
-        run: flutter create . --platforms=android --org com.janata.awaaz
+        run: flutter create . --platforms=android --project-name janata_awaaz --org com.janata.awaaz
 
       - name: Fix MinSdk Direct
         run: |
