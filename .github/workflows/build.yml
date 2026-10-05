@@ -22,24 +22,13 @@ jobs:
         with:
           channel: 'stable'
 
-      - name: Create Scaffold and Configure Android 10+
+      - name: Create Scaffold and Disable AAR Version Check
         run: |
           flutter create . --platforms=android --project-name janata_awaaz --org com.janata.awaaz
-          # build.gradle ma direct navu Android (compileSdk 35, minSdk 29) set karvu
-          python3 -c "
-          import re
-          p = 'android/app/build.gradle'
-          try:
-              with open(p, 'r') as f:
-                  text = f.read()
-              text = re.sub(r'compileSdkVersion\s+.*', 'compileSdkVersion 35', text)
-              text = re.sub(r'minSdkVersion\s+.*', 'minSdkVersion 29', text)
-              text = re.sub(r'targetSdkVersion\s+.*', 'targetSdkVersion 35', text)
-              with open(p, 'w') as f:
-                  f.write(text)
-          except Exception as e:
-              pass
-          "
+          echo "android.disableMinCompileSdkCheck=true" >> android/gradle.properties
+          echo "flutter.minSdkVersion=21" >> android/local.properties
+          echo "flutter.compileSdkVersion=36" >> android/local.properties
+          echo "flutter.targetSdkVersion=36" >> android/local.properties
 
       - name: Install dependencies
         run: flutter pub get
