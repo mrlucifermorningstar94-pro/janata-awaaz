@@ -23,7 +23,10 @@ jobs:
           channel: 'stable'
 
       - name: Generate Android Project Files
-        run: flutter create . --platforms=android --org com.janata.awaaz
+        run: |
+          flutter create . --platforms=android --org com.janata.awaaz
+          sed -i 's/minSdkVersion = flutter.minSdkVersion/minSdkVersion = 21/g' android/app/build.gradle || true
+          sed -i 's/minSdkVersion flutter.minSdkVersion/minSdkVersion 21/g' android/app/build.gradle || true
 
       - name: Install dependencies
         run: flutter pub get
