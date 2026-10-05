@@ -25,16 +25,16 @@ jobs:
 
       - name: Build Clean Flutter App
         run: |
-          flutter create -t app --org com.janata.awaaz app_workspace
+          flutter create -t app --project-name janata_awaaz --org com.janata.awaaz app_workspace
           cp lib/main.dart app_workspace/lib/main.dart
           cp pubspec.yaml app_workspace/pubspec.yaml
           
+          [ -d "assets" ] && cp -r assets app_workspace/ || true
+          [ -d "android/app/src/main/res" ] && cp -r android/app/src/main/res app_workspace/android/app/src/main/ || true
+          
           cd app_workspace
 
-          # 1. Update Kotlin to 1.9.10 in settings.gradle
           sed -i 's/id "org.jetbrains.kotlin.android" version "[^"]*"/id "org.jetbrains.kotlin.android" version "1.9.10"/' android/settings.gradle || true
-
-          # 2. Add ext.kotlin_version fallback
           sed -i "s/ext.kotlin_version = .*/ext.kotlin_version = '1.9.10'/" android/build.gradle || true
 
           flutter pub get
