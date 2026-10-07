@@ -5,6 +5,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 void main() {
   runApp(const JanataAwaazApp());
@@ -550,14 +551,14 @@ class _IssueFormScreenState extends State<IssueFormScreen> {
 class PetitionItem {
   final String title;
   final String category;
-  final String primaryOfficer;     // મૂળ જવાબદાર વ્યક્તિ/હોદ્દો
-  final String inChargeOfficer;     // ચાર્જ/વૈકલ્પિક અધિકારી (જો રજા પર હોય તો)
-  final String superiorOfficer;     // ઉપરના વરિષ્ઠ અધિકારી (Collector/Commissioner)
-  final String departmentPost;      // વિભાગ / કચેરી
-  final String officialEmails;      // સત્તાવાર ઈમેલ (પુરાવા માટે)
-  final String officialContacts;    // સત્તાવાર ફોન નંબર
-  final String allegationReason;    // શું વાંક / બેદરકારી છે
-  final String dateTimeString;      // તારીખ અને સમય
+  final String primaryOfficer;
+  final String inChargeOfficer;
+  final String superiorOfficer;
+  final String departmentPost;
+  final String officialEmails;
+  final String officialContacts;
+  final String allegationReason;
+  final String dateTimeString;
   int votes;
   bool isVoted;
 
@@ -577,7 +578,7 @@ class PetitionItem {
   });
 }
 
-// ----------------- PETITION SCREEN (LIST + VOTING + CREATION) -----------------
+// ----------------- PETITION SCREEN (LIST + VOTING + CREATION + EMAIL DISPATCH) -----------------
 class PetitionVotingScreen extends StatefulWidget {
   final String currentLang;
   const PetitionVotingScreen({super.key, required this.currentLang});
@@ -588,6 +589,20 @@ class PetitionVotingScreen extends StatefulWidget {
 
 class _PetitionVotingScreenState extends State<PetitionVotingScreen> {
   final List<PetitionItem> _petitions = [
+    PetitionItem(
+      title: "સેવા સદન સંપૂર્ણ બંધ: કર્મચારીઓ સામૂહિક હડતાળ પર જતાં સેંકડો અરજદારો હેરાન",
+      category: "કચેરી બંધ / સામૂહિક હડતાળ (Office Strike)",
+      primaryOfficer: "નિવાસી અધિક કલેક્ટર (RAC) / સેવા સદન ઇન્ચાર્જ",
+      inChargeOfficer: "નાયબ મામલતદાર (જનસેવા કેન્દ્ર)",
+      superiorOfficer: "જિલ્લા કલેક્ટરશ્રી / અગ્ર સચિવ (મહેસૂલ વિભાગ)",
+      departmentPost: "જિલ્લા સેવા સદન / મહેસૂલ શાખા",
+      officialEmails: "collector-office@gujarat.gov.in, rac-office@gujarat.gov.in, rev-sec@gujarat.gov.in",
+      officialContacts: "079-23250000, 1800-233-5500",
+      allegationReason:
+          "કોઈપણ પૂર્વ સૂચના કે વૈકલ્પિક વ્યવસ્થા વિના આખી કચેરી અચાનક બંધ કરી દેવામાં આવી. દૂર-દૂરના ગામડાઓમાંથી ભાડાં ખર્ચીને આવેલા દાખલા, રેશનકાર્ડ અને જમીનના કામના અરજદારો ભારે હેરાન થયા છે. જાહેર સેવા અધિનિયમ મુજબ તાત્કાલિક ઇમરજન્સી કાઉન્ટર ઊભું કરવામાં આવે.",
+      dateTimeString: "07/10/2026, 11:15 AM",
+      votes: 18450,
+    ),
     PetitionItem(
       title: "વારંવાર રજૂઆત છતાં બિસ્માર રસ્તાઓ અને ગટરનું કામ ન થવા બાબત",
       category: "રસ્તા / ગટર / ખાડા",
@@ -602,21 +617,29 @@ class _PetitionVotingScreenState extends State<PetitionVotingScreen> {
       dateTimeString: "05/10/2026, 11:30 AM",
       votes: 142381,
     ),
-    PetitionItem(
-      title: "પ્રાથમિક આરોગ્ય કેન્દ્રમાં ડોક્ટરની ગેરહાજરી અને દવાનો અભાવ",
-      category: "આરોગ્ય / હોસ્પિટલ",
-      primaryOfficer: "મેડિકલ ઓફિસર (PHC ઇન્ચાર્જ)",
-      inChargeOfficer: "તાલુકા હેલ્થ ઓફિસર (THO)",
-      superiorOfficer: "મુખ્ય જિલ્લા તબીબી અધિકારી (CDHO) / DDO",
-      departmentPost: "જિલ્લા આરોગ્ય શાખા / તાલુકા પંચાયત",
-      officialEmails: "cdho-health@gujarat.gov.in, ddo-office@nic.in",
-      officialContacts: "02712-232000, 104 হেল্পলাইন",
-      allegationReason:
-          "હોસ્પિટલમાં નિયમિત સમય પર હાજર ન રહેવું અને 'આ અમારું કામ નથી' કહી દર્દીઓને જિલ્લા સિવિલમાં ધક્કા ખવડાવવા.",
-      dateTimeString: "04/10/2026, 04:15 PM",
-      votes: 89450,
-    ),
   ];
+
+  Future<void> _sendOfficialEmail(PetitionItem p) async {
+    final emailUri = Uri(
+      scheme: 'mailto',
+      path: p.officialEmails.split(',').first.trim(),
+      query: 'subject=${Uri.encodeComponent("તાત્કાલિક સત્તાવાર રજૂઆત: ${p.title}")}&body=${Uri.encodeComponent("પ્રતિશ્રી,\n${p.superiorOfficer},\n${p.primaryOfficer},\n\nવિષય: ${p.title}\n\nઘટના સ્થળ અને વિભાગ: ${p.departmentPost}\nતારીખ અને સમય: ${p.dateTimeString}\nકુલ અસરગ્રસ્ત નાગરિકો/વોટ: ${p.votes}\n\nવિગતવાર ફરિયાદ / બેદરકારી:\n${p.allegationReason}\n\nઆ ફરિયાદ જનતા અવાજ નાગરિક મંચ દ્વારા સત્તાવાર પુરાવા સાથે દાખલ કરવામાં આવેલ છે. તાત્કાલિક યોગ્ય તપાસ અને વૈકલ્પિક વ્યવસ્થા ગોઠવવા નમ્ર વિનંતી.\n\n- જનતા અવાજ નાગરિક એકતા")}',
+    );
+
+    try {
+      if (await canLaunchUrl(emailUri)) {
+        await launchUrl(emailUri);
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("ઈમેલ એપ ખોલવામાં નિષ્ફળ. સત્તાવાર ઈમેલ કોપી કરી લ્યો.")),
+        );
+      }
+    } catch (_) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("ઈમેલ ક્લાયન્ટ શરૂ થઈ શક્યું નથી.")),
+      );
+    }
+  }
 
   void _showNoticeSentDialog(PetitionItem p) {
     showDialog(
@@ -634,7 +657,7 @@ class _PetitionVotingScreenState extends State<PetitionVotingScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              "આ પિટિશનની સંપૂર્ણ વિગત નીચે મુજબના સત્તાવાર સરકારી ઈમેલ અને ફોન નંબર પર નોટિસ સ્વરૂપે મોકલી આપવા માટે નોંધાઈ ગઈ છે:",
+              "આ ફરિયાદની સંપૂર્ણ વિગત નીચેના સત્તાવાર સરકારી ઈમેલ અને સંપર્ક નંબર પર મોકલી આપવા માટે રેકોર્ડ થઈ છે:",
               style: TextStyle(fontSize: 13, height: 1.4),
             ),
             const SizedBox(height: 12),
@@ -664,17 +687,26 @@ class _PetitionVotingScreenState extends State<PetitionVotingScreen> {
                 ],
               ),
             ),
-            const SizedBox(height: 10),
-            const Text(
-              "હવે કોઈ પણ અધિકારી એવું બહાનું નહીં કાઢી શકે કે 'અમને ખબર નથી' અથવા 'અમે એપ નથી વાપરતા', કારણ કે આ રેકોર્ડ કાયમી સરકારી ઈમેલ લોગમાં પુરાવા સાથે દાખલ થયો છે!",
-              style: TextStyle(fontSize: 12, color: Color(0xFF138808), fontWeight: FontWeight.bold),
+            const SizedBox(height: 12),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton.icon(
+                style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF138808)),
+                icon: const Icon(Icons.send, color: Colors.white, size: 18),
+                label: const Text("સીધો ઈમેલ મોકલો (Send Official Notice)",
+                    style: TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.bold)),
+                onPressed: () {
+                  Navigator.pop(ctx);
+                  _sendOfficialEmail(p);
+                },
+              ),
             ),
           ],
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx),
-            child: const Text("ઠીક છે (બંધ કરો)", style: TextStyle(color: Color(0xFF138808), fontWeight: FontWeight.bold)),
+            child: const Text("બંધ કરો", style: TextStyle(color: Colors.grey)),
           ),
         ],
       ),
@@ -695,10 +727,11 @@ class _PetitionVotingScreenState extends State<PetitionVotingScreen> {
 
     bool hasInCharge = false;
 
-    String selectedCategory = "પાણી પુરવઠો (Water Supply)";
-    String selectedDept = "મ્યુનિસિપલ કોર્પોરેશન / નગરપાલિકા";
+    String selectedCategory = "કચેરી બંધ / સામૂહિક હડતાળ (Office Strike)";
+    String selectedDept = "જિલ્લા સેવા સદન / કલેક્ટર કચેરી";
 
     final categories = [
+      "કચેરી બંધ / સામૂહિક હડતાળ (Office Strike)",
       "પાણી પુરવઠો (Water Supply)",
       "રસ્તા / ગટર / ખાડા (Roads & Drainage)",
       "વીજળી / લાઈટ (Electricity/GEB)",
@@ -711,9 +744,9 @@ class _PetitionVotingScreenState extends State<PetitionVotingScreen> {
     ];
 
     final departments = [
+      "જિલ્લા સેવા સદન / કલેક્ટર કચેરી",
       "મ્યુનિસિપલ કોર્પોરેશન / નગરપાલિકા",
       "ગ્રામ પંચાયત / તાલુકા પંચાયત",
-      "કલેક્ટર કચેરી / મામલતદાર ઓફિસ",
       "વીજળી બોર્ડ (GEB / Discom)",
       "પોલીસ તંત્ર (Police Department)",
       "પી.ડબલ્યુ.ડી. (PWD - માર્ગ-મકાન)",
@@ -754,7 +787,7 @@ class _PetitionVotingScreenState extends State<PetitionVotingScreen> {
                       ],
                     ),
                     const Text(
-                      "ધક્કામુક્કી અને બહાનાબાજી બંધ કરવા ત્રણેય સ્તરના અધિકારીઓને સાથે ટેગ કરો:",
+                      "હડતાળ, કચેરી બંધ કે ધક્કાબાજી સામે ત્રણેય સ્તરના વડાઓને સાથે ટેગ કરો:",
                       style: TextStyle(fontSize: 12, color: Colors.black54),
                     ),
                     const SizedBox(height: 14),
@@ -764,13 +797,13 @@ class _PetitionVotingScreenState extends State<PetitionVotingScreen> {
                       controller: titleCtrl,
                       decoration: const InputDecoration(
                         labelText: "મુખ્ય વિષય / મુદ્દો",
-                        hintText: "દા.ત. ૬ મહિનાથી રોડનું કામ અટકાવી ધક્કા ખવડાવે છે",
+                        hintText: "દા.ત. સેવા સદન બંધ રહેતાં અરજદારો હેરાન",
                         border: OutlineInputBorder(),
                       ),
                     ),
                     const SizedBox(height: 12),
 
-                    // ૨. સમસ્યાનો પ્રકાર (Dropdown + Other)
+                    // ૨. સમસ્યાનો પ્રકાર
                     DropdownButtonFormField<String>(
                       value: selectedCategory,
                       decoration: const InputDecoration(
@@ -784,6 +817,12 @@ class _PetitionVotingScreenState extends State<PetitionVotingScreen> {
                       onChanged: (val) {
                         setModalState(() {
                           selectedCategory = val!;
+                          if (selectedCategory.contains("Office Strike")) {
+                            primaryOfficerCtrl.text = "નિવાસી અધિક કલેક્ટર (RAC)";
+                            superiorCtrl.text = "જિલ્લા કલેક્ટરશ્રી / મહેસૂલ સચિવ";
+                            emailCtrl.text = "collector-office@gujarat.gov.in, rev-sec@gujarat.gov.in";
+                            phoneCtrl.text = "079-23250000";
+                          }
                         });
                       },
                     ),
@@ -800,7 +839,7 @@ class _PetitionVotingScreenState extends State<PetitionVotingScreen> {
                     ],
                     const SizedBox(height: 12),
 
-                    // ૩. કચેરી / વિભાગ (Dropdown + Other)
+                    // ૩. કચેરી / વિભાગ
                     DropdownButtonFormField<String>(
                       value: selectedDept,
                       decoration: const InputDecoration(
@@ -835,7 +874,7 @@ class _PetitionVotingScreenState extends State<PetitionVotingScreen> {
                       controller: primaryOfficerCtrl,
                       decoration: const InputDecoration(
                         labelText: "૩. મૂળ જવાબદાર અધિકારી / નેતા",
-                        hintText: "દા.ત. કાર્યપાલક ઇજનેર / સંબંધિત ધારાસભ્ય",
+                        hintText: "દા.ત. નિવાસી અધિક કલેક્ટર (RAC) / મામલતદાર",
                         border: OutlineInputBorder(),
                       ),
                     ),
@@ -855,7 +894,7 @@ class _PetitionVotingScreenState extends State<PetitionVotingScreen> {
                         controller: inChargeCtrl,
                         decoration: const InputDecoration(
                           labelText: "ચાર્જ અધિકારી / લિંક ઓફિસરનું પદ/નામ",
-                          hintText: "દા.ત. નાયબ ઇજનેર (ચાર્જ)",
+                          hintText: "દા.ત. નાયબ ઇજનેર / નાયબ મામલતદાર",
                           border: OutlineInputBorder(),
                         ),
                       ),
@@ -867,18 +906,18 @@ class _PetitionVotingScreenState extends State<PetitionVotingScreen> {
                       controller: superiorCtrl,
                       decoration: const InputDecoration(
                         labelText: "૪. ઉપરી વરિષ્ઠ અધિકારી (સુપરવાઇઝર / બોસ)",
-                        hintText: "દા.ત. જિલ્લા કલેક્ટર / મ્યુનિસિપલ કમિશનર / DDO",
+                        hintText: "દા.ત. જિલ્લા કલેક્ટરશ્રી / મ્યુનિસિપલ કમિશનર",
                         border: OutlineInputBorder(),
                       ),
                     ),
                     const SizedBox(height: 12),
 
-                    // ૬. સત્તાવાર ઈમેલ (પુરાવા માટે)
+                    // ૬. સત્તાવાર ઈમેલ
                     TextField(
                       controller: emailCtrl,
                       decoration: const InputDecoration(
                         labelText: "૫. કચેરી/અધિકારીના સત્તાવાર ઈમેલ (Email IDs)",
-                        hintText: "દા.ત. collector-amd@gujarat.gov.in (અલ્પવિરામથી અલગ કરો)",
+                        hintText: "દા.ત. collector-office@gujarat.gov.in",
                         border: OutlineInputBorder(),
                       ),
                     ),
@@ -900,8 +939,8 @@ class _PetitionVotingScreenState extends State<PetitionVotingScreen> {
                       controller: reasonCtrl,
                       maxLines: 3,
                       decoration: const InputDecoration(
-                        labelText: "૭. શું વાંક છે? (ધક્કાબાજી / બેદરકારીની વિગત)",
-                        hintText: "કેમ કામ નથી કરતા અને શું જવાબ આપે છે તે સ્પષ્ટ લખો...",
+                        labelText: "૭. શું વાંક છે? (હડતાળ / ધક્કાબાજીની વિગત)",
+                        hintText: "કચેરી કેમ બંધ છે અથવા શું મુશ્કેલી પડી રહી છે તે સ્પષ્ટ લખો...",
                         border: OutlineInputBorder(),
                       ),
                     ),
@@ -942,11 +981,11 @@ class _PetitionVotingScreenState extends State<PetitionVotingScreen> {
                                   inChargeOfficer: hasInCharge ? inChargeCtrl.text : '',
                                   superiorOfficer: superiorCtrl.text.isNotEmpty ? superiorCtrl.text : "જિલ્લા કલેક્ટર કચેરી",
                                   departmentPost: finalDept,
-                                  officialEmails: emailCtrl.text.isNotEmpty ? emailCtrl.text : "official-desk@gujarat.gov.in",
-                                  officialContacts: phoneCtrl.text.isNotEmpty ? phoneCtrl.text : "સ્થાનિક સરકારી ટોલ-ફ્રી / કન્ટ્રોલ રૂમ",
+                                  officialEmails: emailCtrl.text.isNotEmpty ? emailCtrl.text : "collector-office@gujarat.gov.in",
+                                  officialContacts: phoneCtrl.text.isNotEmpty ? phoneCtrl.text : "1800-233-5500",
                                   allegationReason: reasonCtrl.text.isNotEmpty
                                       ? reasonCtrl.text
-                                      : "પ્રજાની રજૂઆત ન સાંભળવી, ખોટા ધક્કા ખવડાવવા અને ફરજમાં ગંભીર બેદરકારી.",
+                                      : "કચેરી બંધ રહેવાથી અરજદારો હેરાન અને વૈકલ્પિક વ્યવસ્થાનો અભાવ.",
                                   dateTimeString: formattedDate,
                                   votes: 1,
                                   isVoted: true,
@@ -1051,7 +1090,7 @@ class _PetitionVotingScreenState extends State<PetitionVotingScreen> {
                     ],
                   ),
 
-                  // ચાર્જ અધિકારી (જો હોય તો)
+                  // ચાર્જ અધિકારી
                   if (p.inChargeOfficer.isNotEmpty) ...[
                     const SizedBox(height: 6),
                     Row(
@@ -1108,7 +1147,7 @@ class _PetitionVotingScreenState extends State<PetitionVotingScreen> {
                             style: const TextStyle(fontSize: 13, color: Colors.black87),
                             children: [
                               const TextSpan(
-                                  text: "ધક્કાબાજી / વાંક: ",
+                                  text: "સમસ્યા / બેદરકારી: ",
                                   style: TextStyle(fontWeight: FontWeight.bold, color: Colors.redAccent)),
                               TextSpan(text: p.allegationReason),
                             ],
@@ -1135,7 +1174,7 @@ class _PetitionVotingScreenState extends State<PetitionVotingScreen> {
                         children: [
                           Icon(Icons.mark_email_read, size: 16, color: Color(0xFF138808)),
                           SizedBox(width: 6),
-                          Text("સત્તાવાર ઈમેલ અને ફોન નોટિસ પુરાવો જુઓ",
+                          Text("સત્તાવાર નોટિસ મોકલો / પુરાવો જુઓ (Send Notice)",
                               style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: Color(0xFF138808))),
                         ],
                       ),
